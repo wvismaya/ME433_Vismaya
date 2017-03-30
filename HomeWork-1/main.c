@@ -38,6 +38,8 @@
 //#pragma config FUSBIDIO = x // USB pins controlled by USB module
 //#pragma config FVBUSONIO = x // USB BUSON controlled by USB module
 
+#define DELAY_TIME 1000
+
 int main() {
 
     __builtin_disable_interrupts();
@@ -62,14 +64,18 @@ int main() {
     int i = 0;
 
     while(1) {
-	    // use _CP0_SET_COUNT(0) and _CP0_GET_COUNT() to test the PIC timing
-		  // remember the core timer runs at half the sysclk
+        // use _CP0_SET_COUNT(0) and _CP0_GET_COUNT() to test the PIC timing
+          // remember the core timer runs at half the sysclk
         //LATA = 0x0000;
         while(!PORTBbits.RB7){
-            LATA = 0xFFFF;
-            for(i=0; i<=10000; i++);
-            LATA = 0x0000;
-            for(i=0; i<=10000; i++);   
+            LATAbits.LATA1 = 0xFFFF;
+            _CP0_SET_COUNT(0);
+            while(_CP0_GET_COUNT() <= DELAY_TIME);
+            //for(i=0; i<=1000; i++);
+            LATAbits.LATA1 = 0x0000;
+            _CP0_SET_COUNT(0);
+            while(_CP0_GET_COUNT() <= DELAY_TIME);
+            //for(i=0; i<=1000; i++);   
         }
     }
 }

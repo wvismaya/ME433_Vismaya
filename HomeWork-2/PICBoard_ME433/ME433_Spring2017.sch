@@ -10424,37 +10424,6 @@ No silk outline, but tDocu layer shows pin location.
 <text x="2.159" y="3.683" size="0.6096" layer="25" font="vector" ratio="20">&gt;NAME</text>
 <text x="2.032" y="-4.572" size="0.6096" layer="27" font="vector" ratio="20">&gt;VALUE</text>
 </package>
-<package name="USB-MINIB">
-<description>&lt;h3&gt;USB Type Mini-B Surface Mounted&lt;/h3&gt;
-&lt;p&gt;Specifications:
-&lt;ul&gt;&lt;li&gt;Pin count: 5 main, 4 shield pins&lt;/li&gt;
-&lt;/ul&gt;&lt;/p&gt;
-&lt;p&gt;&lt;a href=”https://www.sparkfun.com/datasheets/Prototyping/miniUSB-Dimensional.pdf”&gt;Datasheet referenced for footprint&lt;/a&gt;&lt;/p&gt;
-
-&lt;p&gt;Example device(s):
-&lt;ul&gt;&lt;li&gt;USB_Mini-B&lt;/li&gt;
-&lt;/ul&gt;&lt;/p&gt;</description>
-<wire x1="-1.3" y1="3.8" x2="0.8" y2="3.8" width="0.2032" layer="21"/>
-<wire x1="3.3" y1="3.1" x2="3.3" y2="2.2" width="0.2032" layer="21"/>
-<wire x1="3.3" y1="-2.2" x2="3.3" y2="-3.1" width="0.2032" layer="21"/>
-<wire x1="0.8" y1="-3.8" x2="-1.3" y2="-3.8" width="0.2032" layer="21"/>
-<wire x1="-5.9" y1="3.8" x2="-5.9" y2="-3.8" width="0.2032" layer="51"/>
-<wire x1="-5.9" y1="-3.8" x2="-4.5" y2="-3.8" width="0.2032" layer="51"/>
-<wire x1="-5.9" y1="3.8" x2="-4.5" y2="3.8" width="0.2032" layer="51"/>
-<smd name="D+" x="2.5" y="0" dx="2.5" dy="0.5" layer="1"/>
-<smd name="D-" x="2.5" y="0.8" dx="2.5" dy="0.5" layer="1"/>
-<smd name="GND" x="2.5" y="-1.6" dx="2.5" dy="0.5" layer="1"/>
-<smd name="ID" x="2.5" y="-0.8" dx="2.5" dy="0.5" layer="1"/>
-<smd name="S3" x="-3" y="-4.5" dx="2.5" dy="2" layer="1"/>
-<smd name="S1" x="-3" y="4.5" dx="2.5" dy="2" layer="1"/>
-<smd name="S4" x="2.5" y="-4.5" dx="2.5" dy="2" layer="1"/>
-<smd name="S2" x="2.5" y="4.5" dx="2.5" dy="2" layer="1"/>
-<smd name="VBUS" x="2.5" y="1.6" dx="2.5" dy="0.5" layer="1"/>
-<text x="-3.81" y="6.35" size="0.8128" layer="25" font="vector" ratio="20">&gt;NAME</text>
-<text x="-3.81" y="-6.35" size="0.8128" layer="27" font="vector" ratio="20" align="top-left">&gt;VALUE</text>
-<hole x="0" y="2.2" drill="0.9"/>
-<hole x="0" y="-2.2" drill="0.9"/>
-</package>
 <package name="1X06">
 <description>&lt;h3&gt;Plated Through Hole - 6 Pin&lt;/h3&gt;
 &lt;p&gt;Specifications:
@@ -11202,6 +11171,34 @@ Alternate pin configuration
 <text x="-0.381" y="1.016" size="0.6096" layer="25" font="vector" ratio="20">&gt;NAME</text>
 <text x="-0.381" y="-1.651" size="0.6096" layer="27" font="vector" ratio="20">&gt;VALUE</text>
 </package>
+<package name="USB-MB-H">
+<description>&lt;b&gt;USB Series Mini-B Hole Mounted&lt;/b&gt;</description>
+<wire x1="-3.75" y1="3.9" x2="-3.75" y2="-3.9" width="0.127" layer="22"/>
+<wire x1="5.25" y1="3.9" x2="5.25" y2="-3.9" width="0.127" layer="22"/>
+<wire x1="-3.75" y1="3.9" x2="5.25" y2="3.9" width="0.127" layer="22"/>
+<wire x1="-3.75" y1="-3.9" x2="5.25" y2="-3.9" width="0.127" layer="22"/>
+<wire x1="0.75" y1="3.5" x2="-3.25" y2="3" width="0.127" layer="22"/>
+<wire x1="-3.25" y1="3" x2="-3.25" y2="2" width="0.127" layer="22"/>
+<wire x1="-3.25" y1="2" x2="0.75" y2="1.5" width="0.127" layer="22"/>
+<wire x1="1.25" y1="-3.5" x2="-3.25" y2="-3" width="0.127" layer="22"/>
+<wire x1="-3.25" y1="-3" x2="-3.25" y2="-2" width="0.127" layer="22"/>
+<wire x1="-3.25" y1="-2" x2="1.25" y2="-1.5" width="0.127" layer="22"/>
+<wire x1="-3.25" y1="1.25" x2="1.75" y2="0.75" width="0.127" layer="22"/>
+<wire x1="1.75" y1="0.75" x2="1.75" y2="-0.75" width="0.127" layer="22"/>
+<wire x1="1.75" y1="-0.75" x2="-3.25" y2="-1.25" width="0.127" layer="22"/>
+<pad name="VBUS" x="5.1" y="1.6" drill="0.8"/>
+<pad name="D+" x="5.1" y="0" drill="0.8"/>
+<pad name="GND" x="5.1" y="-1.6" drill="0.8"/>
+<pad name="D-" x="3.9" y="0.8" drill="0.8"/>
+<pad name="ID" x="3.9" y="-0.8" drill="0.8"/>
+<pad name="P$6" x="0" y="-3.65" drill="1.9"/>
+<pad name="P$7" x="0" y="3.65" drill="1.9"/>
+<text x="7.25" y="1.5" size="1.27" layer="25" rot="R90">&gt;NAME</text>
+<rectangle x1="3.25" y1="3" x2="5.75" y2="4.4" layer="43"/>
+<rectangle x1="3.25" y1="-4.4" x2="5.75" y2="-3" layer="43"/>
+<rectangle x1="-3.75" y1="-3.1" x2="-1.425" y2="3.1" layer="43"/>
+<rectangle x1="-1.425" y1="-2.325" x2="-0.65" y2="2.325" layer="43"/>
+</package>
 </packages>
 <symbols>
 <symbol name="+3V3">
@@ -11418,24 +11415,6 @@ Alternate pin configuration
 <pin name="2" x="7.62" y="0" visible="pad" length="middle" direction="pas" swaplevel="1" rot="R180"/>
 <pin name="3" x="7.62" y="2.54" visible="pad" length="middle" direction="pas" swaplevel="1" rot="R180"/>
 </symbol>
-<symbol name="USB-MINIB">
-<description>&lt;h3&gt;USB - 5 pin&lt;/h3&gt;
-&lt;p&gt;5 pin USB connector: VBUS, GND, D+, D-, ID &lt;/p&gt;
-&lt;p&gt;Includes 4 pins for shield connections &lt;/p&gt;</description>
-<wire x1="5.08" y1="7.62" x2="-2.54" y2="7.62" width="0.254" layer="94"/>
-<wire x1="-2.54" y1="7.62" x2="-2.54" y2="-7.62" width="0.254" layer="94"/>
-<wire x1="-2.54" y1="-7.62" x2="5.08" y2="-7.62" width="0.254" layer="94"/>
-<text x="2.794" y="-3.302" size="2.54" layer="94" rot="R90">USB</text>
-<pin name="D+" x="-5.08" y="0" visible="pad" length="short"/>
-<pin name="D-" x="-5.08" y="2.54" visible="pad" length="short"/>
-<pin name="VBUS" x="-5.08" y="5.08" visible="pad" length="short" direction="pwr"/>
-<pin name="GND" x="-5.08" y="-5.08" visible="pad" length="short" direction="pwr"/>
-<pin name="ID" x="-5.08" y="-2.54" visible="pad" length="short"/>
-<pin name="SHIELD" x="7.62" y="0" visible="pad" length="short" rot="R180"/>
-<text x="-2.54" y="7.874" size="1.778" layer="95" font="vector">&gt;NAME</text>
-<text x="-2.54" y="-7.874" size="1.778" layer="96" font="vector" align="top-left">&gt;VALUE</text>
-<wire x1="5.08" y1="7.62" x2="5.08" y2="-7.62" width="0.254" layer="94"/>
-</symbol>
 <symbol name="CONN_06">
 <description>&lt;h3&gt;6 Pin Connection&lt;/h3&gt;</description>
 <wire x1="1.27" y1="-7.62" x2="-5.08" y2="-7.62" width="0.4064" layer="94"/>
@@ -11456,6 +11435,19 @@ Alternate pin configuration
 <pin name="4" x="5.08" y="2.54" visible="pad" length="middle" direction="pas" swaplevel="1" rot="R180"/>
 <pin name="5" x="5.08" y="5.08" visible="pad" length="middle" direction="pas" swaplevel="1" rot="R180"/>
 <pin name="6" x="5.08" y="7.62" visible="pad" length="middle" direction="pas" swaplevel="1" rot="R180"/>
+</symbol>
+<symbol name="USB">
+<wire x1="5.08" y1="11.43" x2="0" y2="11.43" width="0.254" layer="94"/>
+<wire x1="0" y1="11.43" x2="0" y2="-1.27" width="0.254" layer="94"/>
+<wire x1="0" y1="-1.27" x2="5.08" y2="-1.27" width="0.254" layer="94"/>
+<text x="3.81" y="0" size="2.54" layer="94" rot="R90">USB</text>
+<pin name="D+" x="-2.54" y="7.62" visible="pad" length="short"/>
+<pin name="D-" x="-2.54" y="5.08" visible="pad" length="short"/>
+<pin name="VBUS" x="-2.54" y="2.54" visible="pad" length="short"/>
+<pin name="GND" x="-2.54" y="0" visible="pad" length="short"/>
+<text x="0" y="9.525" size="1.778" layer="95">&gt;NAME</text>
+<text x="0" y="-3.81" size="1.778" layer="96">&gt;VALUE</text>
+<pin name="ID" x="-2.54" y="10.16" length="short"/>
 </symbol>
 </symbols>
 <devicesets>
@@ -15692,36 +15684,6 @@ Source: www.golledge.com</description>
 </device>
 </devices>
 </deviceset>
-<deviceset name="USB_MINI-B" prefix="J">
-<description>&lt;h3&gt;USB type Mini-B Connector&lt;/h3&gt;
-&lt;p&gt;Breaks out 5th pin, and includes shield pins if needed.&lt;/p&gt;
-&lt;p&gt;SparkFun Products:
-&lt;ul&gt;&lt;li&gt;&lt;a href="https://www.sparkfun.com/products/9716”&gt;SparkFun FTDI Basic Breakout&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;&lt;a href="https://www.sparkfun.com/products/11812”&gt;SparkFun XBee Explorer USB&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;&lt;a href=”https://www.sparkfun.com/products/12757”&gt;SparkFun Redboard&lt;/a&gt;&lt;/li&gt;
-&lt;/ul&gt;&lt;/p&gt;</description>
-<gates>
-<gate name="G$1" symbol="USB-MINIB" x="0" y="0"/>
-</gates>
-<devices>
-<device name="_SMT" package="USB-MINIB">
-<connects>
-<connect gate="G$1" pin="D+" pad="D+"/>
-<connect gate="G$1" pin="D-" pad="D-"/>
-<connect gate="G$1" pin="GND" pad="GND"/>
-<connect gate="G$1" pin="ID" pad="ID"/>
-<connect gate="G$1" pin="SHIELD" pad="S1 S2 S3 S4"/>
-<connect gate="G$1" pin="VBUS" pad="VBUS"/>
-</connects>
-<technologies>
-<technology name="">
-<attribute name="PROD_ID" value="CONN-08193"/>
-<attribute name="SF_ID" value="PRT-00587" constant="no"/>
-</technology>
-</technologies>
-</device>
-</devices>
-</deviceset>
 <deviceset name="PICKIT3" prefix="J" uservalue="yes">
 <description>&lt;h3&gt;Multi connection point. Often used as Generic Header-pin footprint for 0.1 inch spaced/style header connections&lt;/h3&gt;
 
@@ -16051,6 +16013,34 @@ Source: www.golledge.com</description>
 </device>
 </devices>
 </deviceset>
+<deviceset name="USB" prefix="J">
+<description>&lt;b&gt;USB Connectors&lt;/b&gt;
+&lt;p&gt;USB-B-PTH is fully proven SKU : PRT-00139/CONN-08278
+&lt;p&gt;USB-miniB is fully proven SKU : PRT-00587
+&lt;p&gt;USB-A-PCB is untested.
+&lt;p&gt;USB-A-H is throughly reviewed, but untested. Spark Fun Electronics SKU : PRT-00437
+&lt;p&gt;USB-B-SMT is throughly reviewed, but untested. Needs silkscreen touching up.
+&lt;p&gt;USB-A-S has not been used/tested
+&lt;p&gt;USB-MB-H has not been used/tested
+&lt;P&gt;USB-MICROB has been used. CONN-09505</description>
+<gates>
+<gate name="G$1" symbol="USB" x="0" y="0"/>
+</gates>
+<devices>
+<device name="-MB-H" package="USB-MB-H">
+<connects>
+<connect gate="G$1" pin="D+" pad="D+"/>
+<connect gate="G$1" pin="D-" pad="D-"/>
+<connect gate="G$1" pin="GND" pad="GND"/>
+<connect gate="G$1" pin="ID" pad="ID"/>
+<connect gate="G$1" pin="VBUS" pad="VBUS"/>
+</connects>
+<technologies>
+<technology name=""/>
+</technologies>
+</device>
+</devices>
+</deviceset>
 </devicesets>
 </library>
 </libraries>
@@ -16076,7 +16066,6 @@ Source: www.golledge.com</description>
 <part name="PIC32MX250" library="ME433_Spring2017" deviceset="PIC" device="-3" value="pic"/>
 <part name="RED_LED" library="ME433_Spring2017" deviceset="R-US_" device="0204/7" value="330"/>
 <part name="SLIDER_SWITCH" library="ME433_Spring2017" deviceset="SLIDER_SWITCH" device="" value="mains"/>
-<part name="J6" library="ME433_Spring2017" deviceset="USB_MINI-B" device="_SMT"/>
 <part name="RST_PULLUP" library="ME433_Spring2017" deviceset="R-US_" device="0204/7" value="10k"/>
 <part name="PB_RST" library="ME433_Spring2017" deviceset="BUTTONS" device="" value="reset_swtch"/>
 <part name="PIC_KIT_3" library="ME433_Spring2017" deviceset="PICKIT3" device="NO_SILK_FEMALE_PTH" value="programmer"/>
@@ -16100,6 +16089,7 @@ Source: www.golledge.com</description>
 <part name="GND7" library="ME433_Spring2017" deviceset="GND" device=""/>
 <part name="+3V6" library="ME433_Spring2017" deviceset="+3V3" device=""/>
 <part name="GND8" library="ME433_Spring2017" deviceset="GND" device=""/>
+<part name="J1" library="ME433_Spring2017" deviceset="USB" device="-MB-H"/>
 </parts>
 <sheets>
 <sheet>
@@ -16119,7 +16109,6 @@ Source: www.golledge.com</description>
 <instance part="PIC32MX250" gate="G$1" x="99.06" y="58.42"/>
 <instance part="RED_LED" gate="G$1" x="43.18" y="45.72"/>
 <instance part="SLIDER_SWITCH" gate="J$1" x="83.82" y="15.24" rot="MR90"/>
-<instance part="J6" gate="G$1" x="111.76" y="17.78" rot="MR270"/>
 <instance part="RST_PULLUP" gate="G$1" x="139.7" y="101.6" rot="R270"/>
 <instance part="PB_RST" gate="G$1" x="129.54" y="93.98" rot="MR90"/>
 <instance part="PIC_KIT_3" gate="G$1" x="73.66" y="68.58" rot="MR180"/>
@@ -16142,7 +16131,8 @@ Source: www.golledge.com</description>
 <instance part="GND4" gate="1" x="142.24" y="38.1"/>
 <instance part="GND7" gate="1" x="68.58" y="48.26"/>
 <instance part="+3V6" gate="G$1" x="132.08" y="53.34"/>
-<instance part="GND8" gate="1" x="121.92" y="22.86"/>
+<instance part="GND8" gate="1" x="121.92" y="12.7"/>
+<instance part="J1" gate="G$1" x="109.22" y="15.24"/>
 </instances>
 <busses>
 </busses>
@@ -16287,10 +16277,9 @@ Source: www.golledge.com</description>
 <wire x1="71.12" y1="50.8" x2="68.58" y2="50.8" width="0.1524" layer="91"/>
 </segment>
 <segment>
-<pinref part="J6" gate="G$1" pin="GND"/>
-<wire x1="116.84" y1="22.86" x2="116.84" y2="25.4" width="0.1524" layer="91"/>
-<wire x1="116.84" y1="25.4" x2="121.92" y2="25.4" width="0.1524" layer="91"/>
+<pinref part="J1" gate="G$1" pin="GND"/>
 <pinref part="GND8" gate="1" pin="GND"/>
+<wire x1="106.68" y1="15.24" x2="121.92" y2="15.24" width="0.1524" layer="91"/>
 </segment>
 </net>
 <net name="N$5" class="0">
@@ -16372,28 +16361,24 @@ Source: www.golledge.com</description>
 <wire x1="154.94" y1="10.16" x2="139.7" y2="10.16" width="0.1524" layer="91"/>
 <junction x="139.7" y="10.16"/>
 <pinref part="SLIDER_SWITCH" gate="J$1" pin="1"/>
-<wire x1="111.76" y1="10.16" x2="127" y2="10.16" width="0.1524" layer="91"/>
 <wire x1="127" y1="10.16" x2="139.7" y2="10.16" width="0.1524" layer="91"/>
 <wire x1="81.28" y1="22.86" x2="76.2" y2="22.86" width="0.1524" layer="91"/>
 <wire x1="76.2" y1="22.86" x2="73.66" y2="20.32" width="0.1524" layer="91"/>
 <wire x1="73.66" y1="20.32" x2="73.66" y2="10.16" width="0.1524" layer="91"/>
 <wire x1="73.66" y1="10.16" x2="101.6" y2="10.16" width="0.1524" layer="91"/>
 <pinref part="CONN_8_A1" gate="G$1" pin="2"/>
-<wire x1="101.6" y1="10.16" x2="111.76" y2="10.16" width="0.1524" layer="91"/>
+<wire x1="101.6" y1="10.16" x2="127" y2="10.16" width="0.1524" layer="91"/>
 <wire x1="142.24" y1="45.72" x2="152.4" y2="45.72" width="0.1524" layer="91"/>
 <wire x1="152.4" y1="45.72" x2="154.94" y2="43.18" width="0.1524" layer="91"/>
 <wire x1="154.94" y1="43.18" x2="154.94" y2="10.16" width="0.1524" layer="91"/>
-<pinref part="J6" gate="G$1" pin="SHIELD"/>
-<junction x="111.76" y="10.16"/>
-<pinref part="J6" gate="G$1" pin="VBUS"/>
-<wire x1="106.68" y1="22.86" x2="104.14" y2="22.86" width="0.1524" layer="91"/>
-<wire x1="104.14" y1="22.86" x2="101.6" y2="20.32" width="0.1524" layer="91"/>
-<wire x1="101.6" y1="20.32" x2="101.6" y2="10.16" width="0.1524" layer="91"/>
-<junction x="101.6" y="10.16"/>
 <pinref part="PIC32MX250" gate="G$1" pin="15"/>
 <wire x1="106.68" y1="40.64" x2="127" y2="40.64" width="0.1524" layer="91"/>
 <wire x1="127" y1="40.64" x2="127" y2="10.16" width="0.1524" layer="91"/>
 <junction x="127" y="10.16"/>
+<pinref part="J1" gate="G$1" pin="VBUS"/>
+<wire x1="106.68" y1="17.78" x2="101.6" y2="17.78" width="0.1524" layer="91"/>
+<wire x1="101.6" y1="17.78" x2="101.6" y2="10.16" width="0.1524" layer="91"/>
+<junction x="101.6" y="10.16"/>
 </segment>
 </net>
 <net name="N$15" class="0">
@@ -16462,9 +16447,10 @@ Source: www.golledge.com</description>
 <pinref part="PIC32MX250" gate="G$1" pin="22"/>
 <wire x1="99.06" y1="58.42" x2="106.68" y2="58.42" width="0.1524" layer="91"/>
 <wire x1="99.06" y1="58.42" x2="99.06" y2="30.48" width="0.1524" layer="91"/>
-<wire x1="99.06" y1="30.48" x2="109.22" y2="30.48" width="0.1524" layer="91"/>
-<pinref part="J6" gate="G$1" pin="D-"/>
-<wire x1="109.22" y1="30.48" x2="109.22" y2="22.86" width="0.1524" layer="91"/>
+<wire x1="99.06" y1="30.48" x2="114.3" y2="30.48" width="0.1524" layer="91"/>
+<wire x1="114.3" y1="30.48" x2="114.3" y2="22.86" width="0.1524" layer="91"/>
+<pinref part="J1" gate="G$1" pin="D+"/>
+<wire x1="114.3" y1="22.86" x2="106.68" y2="22.86" width="0.1524" layer="91"/>
 </segment>
 </net>
 <net name="N$9" class="0">
@@ -16473,20 +16459,20 @@ Source: www.golledge.com</description>
 <wire x1="106.68" y1="55.88" x2="101.6" y2="55.88" width="0.1524" layer="91"/>
 <wire x1="101.6" y1="55.88" x2="101.6" y2="35.56" width="0.1524" layer="91"/>
 <wire x1="101.6" y1="35.56" x2="104.14" y2="33.02" width="0.1524" layer="91"/>
-<wire x1="104.14" y1="33.02" x2="111.76" y2="33.02" width="0.1524" layer="91"/>
-<pinref part="J6" gate="G$1" pin="D+"/>
-<wire x1="111.76" y1="33.02" x2="111.76" y2="22.86" width="0.1524" layer="91"/>
+<wire x1="104.14" y1="33.02" x2="116.84" y2="33.02" width="0.1524" layer="91"/>
+<pinref part="J1" gate="G$1" pin="D-"/>
+<wire x1="106.68" y1="20.32" x2="116.84" y2="20.32" width="0.1524" layer="91"/>
+<wire x1="116.84" y1="20.32" x2="116.84" y2="33.02" width="0.1524" layer="91"/>
 </segment>
 </net>
 <net name="N$18" class="0">
 <segment>
-<pinref part="J6" gate="G$1" pin="ID"/>
-<wire x1="114.3" y1="22.86" x2="114.3" y2="27.94" width="0.1524" layer="91"/>
-<wire x1="114.3" y1="27.94" x2="99.06" y2="27.94" width="0.1524" layer="91"/>
 <pinref part="PIC32MX250" gate="G$1" pin="14"/>
 <wire x1="91.44" y1="40.64" x2="96.52" y2="40.64" width="0.1524" layer="91"/>
 <wire x1="96.52" y1="40.64" x2="96.52" y2="30.48" width="0.1524" layer="91"/>
-<wire x1="96.52" y1="30.48" x2="99.06" y2="27.94" width="0.1524" layer="91"/>
+<wire x1="96.52" y1="30.48" x2="99.06" y2="25.4" width="0.1524" layer="91"/>
+<pinref part="J1" gate="G$1" pin="ID"/>
+<wire x1="99.06" y1="25.4" x2="106.68" y2="25.4" width="0.1524" layer="91"/>
 </segment>
 </net>
 </nets>

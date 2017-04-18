@@ -83,21 +83,24 @@ int main() {
     //LCD_drawBar(128/2, 128/2, 20, 1, RED); // Draw a line; Vertical
     //LCD_drawBar(128/2, 128/2, 20, 0, CYAN); // Draw a line; Horizontal
     
-    //Write H
-    LCD_drawBar(32, 32, 20, 1, RED); // Vertical Line
-    LCD_drawBar(32, 32+10, 20, 0, RED); // Horizontal Line
-    LCD_drawBar(32+20, 32, 20, 1, RED); // Vertical Line
-    /*
-    //Write I
-    LCD_drawBar(32, 32, 20, 1, RED); // Vertical Line
-    LCD_drawBar(32, 32+10, 20, 0, RED); // Horizontal Line
-    LCD_drawBar(32+20, 32, 20, 1, RED); // Vertical Line
+    int x0 = 32;
+    int y0 = 32;
     
+    unsigned short charcode[4][5] = {  
+   {0x00, 0x00, 0x5f, 0x00, 0x00} // 21 !
+,{0x00, 0x07, 0x00, 0x07, 0x00} // 22 "
+,{0x14, 0x7f, 0x14, 0x7f, 0x14} // 23 #
+,{0x24, 0x2a, 0x7f, 0x2a, 0x12} // 24 $
+};
+    /*
     //Write !
     LCD_drawBar(32, 32, 20, 1, RED); // Vertical Line
     LCD_drawBar(32, 32+10, 20, 0, RED); // Horizontal Line
     LCD_drawBar(32+20, 32, 20, 1, RED); // Vertical Line
     */
+    /*Write string of arbitary characters*/
+    LCD_writechar(x0, y0, charcode);
+    
     while(1) {
         delay_core_timer(1000);
         //LATAINV=0b10000;

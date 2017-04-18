@@ -229,3 +229,34 @@ void LCD_clearScreen(unsigned short color) {
 			LCD_data16(color);
 		}
 }
+
+/*
+ * Create an algorithm to take an ascii character, like 'H' 
+ * (also represented by decimal 72), 
+ * and draw it so that the top left corner is at any pixel location,
+ * using LCD_drawPixel to write the ASCII matrix contents to the LCD. 
+ * For example, the first byte in the image is 0x7f, or 0b 011 111 11. 
+ * So the pixel at (x,y) should be off, (x,y+1) should be on, (x,y+2) should be on, and so on. 
+ * The second byte is 0x08, or 0b00001000, 
+ * so the pixel at (x+1,y) should be off (and so on) and the pixel at (x+1,y+1) should be off. 
+ * Do this for every byte in ASCII for the character your are displaying. 
+ * check if the pixel location exists before trying to write to it
+ * (if the start location is (126,125) 
+ * you will run out of room in both the x and y directions).
+ */
+void LCD_writechar(unsigned short x0, unsigned short y0, unsigned short charcode[4][5]){
+    int ii, jj, kk;
+    
+    for (kk = 0; kk < 4; kk++){
+    for (jj = 0; jj < 5; jj++){
+        for (ii = 0; ii < 8; ii++){
+            if(0b00000001 & (charcode[kk][jj] >> ii)){
+                LCD_drawPixel(x0+jj+(kk*5+2), y0+ii, RED);   
+            }
+            else{
+                LCD_drawPixel(x0+jj+(kk*5+2), y0+ii, BLACK);
+            }
+        }
+    }
+    }
+}

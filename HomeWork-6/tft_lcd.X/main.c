@@ -80,10 +80,24 @@ int main() {
     LCD_clearScreen(BLACK);
     
     // Set bar
-    LCD_drawBar(128/2, 128/2, 20, 1, RED); // Draw a line
-    LCD_drawBar(128/2, 128/2, 20, 0, CYAN); // Draw a line
+    //LCD_drawBar(128/2, 128/2, 20, 1, RED); // Draw a line; Vertical
+    //LCD_drawBar(128/2, 128/2, 20, 0, CYAN); // Draw a line; Horizontal
     
-    //Write Hi!
+    //Write H
+    LCD_drawBar(32, 32, 20, 1, RED); // Vertical Line
+    LCD_drawBar(32, 32+10, 20, 0, RED); // Horizontal Line
+    LCD_drawBar(32+20, 32, 20, 1, RED); // Vertical Line
+    /*
+    //Write I
+    LCD_drawBar(32, 32, 20, 1, RED); // Vertical Line
+    LCD_drawBar(32, 32+10, 20, 0, RED); // Horizontal Line
+    LCD_drawBar(32+20, 32, 20, 1, RED); // Vertical Line
+    
+    //Write !
+    LCD_drawBar(32, 32, 20, 1, RED); // Vertical Line
+    LCD_drawBar(32, 32+10, 20, 0, RED); // Horizontal Line
+    LCD_drawBar(32+20, 32, 20, 1, RED); // Vertical Line
+    */
     while(1) {
         delay_core_timer(1000);
         //LATAINV=0b10000;

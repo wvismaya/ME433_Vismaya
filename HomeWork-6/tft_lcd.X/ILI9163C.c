@@ -244,17 +244,17 @@ void LCD_clearScreen(unsigned short color) {
  * (if the start location is (126,125) 
  * you will run out of room in both the x and y directions).
  */
-void LCD_writechar(unsigned short x0, unsigned short y0, unsigned short charcode[4][5]){
+void LCD_writechar(unsigned short x0, unsigned short y0, unsigned short charcode[13][5]){
     int ii, jj, kk;
     
-    for (kk = 0; kk < 4; kk++){
+    for (kk = 0; kk < 13; kk++){
     for (jj = 0; jj < 5; jj++){
         for (ii = 0; ii < 8; ii++){
             if(0b00000001 & (charcode[kk][jj] >> ii)){
-                LCD_drawPixel(x0+jj+(kk*5+2), y0+ii, RED);   
+                LCD_drawPixel(x0+jj+(kk*7), y0+ii, RED);   
             }
             else{
-                LCD_drawPixel(x0+jj+(kk*5+2), y0+ii, BLACK);
+                LCD_drawPixel(x0+jj+(kk*7), y0+ii, BLACK);
             }
         }
     }

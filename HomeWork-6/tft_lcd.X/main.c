@@ -101,19 +101,26 @@ int main() {
     ,{0x00, 0x00, 0x00, 0x00, 0x00} // 20 (space)
     ,{0x00, 0x00, 0x5f, 0x00, 0x00} // 21 !
 };
-    /*
-    //Write !
-    LCD_drawBar(32, 32, 20, 1, RED); // Vertical Line
-    LCD_drawBar(32, 32+10, 20, 0, RED); // Horizontal Line
-    LCD_drawBar(32+20, 32, 20, 1, RED); // Vertical Line
-    */
     /*Write string of arbitary characters*/
     LCD_writechar(x0, y0, charcode);
+    int len0;
+    int dd;
     
     while(1) {
-        delay_core_timer(1000);
-        //LATAINV=0b10000;
-        toggle_A_pin(4);
-        while(PORTBbits.RB4); // Pin B4 is HIGH if pressed.
+        x0 = 20;
+        y0 = x0 + 15;
+        len0 = 10;
+        
+        while(x0<100){
+            for(dd = 0; dd<1000000; dd++);
+         //LATAINV=0b10000;
+         //toggle_A_pin(4);
+         //while(PORTBbits.RB4); // Pin B4 is HIGH if pressed.
+         //Draw the slider
+         LCD_drawBar(x0, y0, len0, 0, CYAN); // Draw a line; Horizontal
+         x0 = x0 + len0;
+        }
+        for(dd = 0; dd<1000000; dd++);
+        LCD_drawBar(20, 20+15, 100-20, 0, BLACK); // Draw a line; Horizontal
     }  
 }

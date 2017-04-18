@@ -165,7 +165,7 @@ static const char ASCII[96][5] = {
 #define MAGENTA   0xF81F
 #define YELLOW    0xFFE0
 
-#define _BARWIDTH 4
+#define _BARWIDTH 15
 #define _ALPHALEN 20
 #define _ALPHASPACE 4
 // Thus we can draw 32 bars horizontally and 32 bars vertically

@@ -173,6 +173,7 @@ void LCD_drawPixel(unsigned short x, unsigned short y, unsigned short color) {
 void LCD_drawBar(unsigned short x0, unsigned short y0, unsigned short len, unsigned short dir, unsigned short color){
         
     int ii = 0;
+    int jj = 0;
     // dir = 1 Horizontal line
     // dir = 0 Vertical line
     
@@ -185,16 +186,10 @@ void LCD_drawBar(unsigned short x0, unsigned short y0, unsigned short len, unsig
         if(y0 < (0 + _BARWIDTH)){
             y0 = 0 - _BARWIDTH;
         }
+        for(jj; jj<=_BARWIDTH;jj++){
         for(ii; ii <= len; ii++){
-            LCD_drawPixel(x0+0, y0+ii, color); // set the x,y pixel to a color
-            LCD_drawPixel(x0+1, y0+ii, color); // set the x,y pixel to a color
-            LCD_drawPixel(x0+2, y0+ii, color); // set the x,y pixel to a color
-            LCD_drawPixel(x0+3, y0+ii, color); // set the x,y pixel to a color
-            LCD_drawPixel(x0+4, y0+ii, color); // set the x,y pixel to a color
-            LCD_drawPixel(x0+5, y0+ii, color); // set the x,y pixel to a color
-            LCD_drawPixel(x0+6, y0+ii, color); // set the x,y pixel to a color
-            LCD_drawPixel(x0+7, y0+ii, color); // set the x,y pixel to a color
-            LCD_drawPixel(x0+8, y0+ii, color); // set the x,y pixel to a color
+            LCD_drawPixel(x0+jj, y0+ii, color); // set the x,y pixel to a color
+        }
         }
     }
     else
@@ -206,16 +201,10 @@ void LCD_drawBar(unsigned short x0, unsigned short y0, unsigned short len, unsig
         if(x0 < (0 + _BARWIDTH)){
             x0 = 0 - _BARWIDTH;
         }
+        for(jj; jj<=_BARWIDTH;jj++){
         for(ii; ii <= len; ii++){
-            LCD_drawPixel(x0+ii, y0+0, color); // set the x,y pixel to a color
-            LCD_drawPixel(x0+ii, y0+1, color); // set the x,y pixel to a color
-            LCD_drawPixel(x0+ii, y0+2, color); // set the x,y pixel to a color
-            LCD_drawPixel(x0+ii, y0+3, color); // set the x,y pixel to a color
-            LCD_drawPixel(x0+ii, y0+4, color); // set the x,y pixel to a color
-            LCD_drawPixel(x0+ii, y0+5, color); // set the x,y pixel to a color
-            LCD_drawPixel(x0+ii, y0+6, color); // set the x,y pixel to a color
-            LCD_drawPixel(x0+ii, y0+7, color); // set the x,y pixel to a color
-            LCD_drawPixel(x0+ii, y0+8, color); // set the x,y pixel to a color
+            LCD_drawPixel(x0+ii, y0+jj, color); // set the x,y pixel to a color
+        }
         }
     }
         

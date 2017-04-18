@@ -79,24 +79,11 @@ int main() {
     // Set background color
     LCD_clearScreen(BLACK);
     
-    // Pixel 0,0
-    LCD_drawPixel(0, 0, WHITE); // set the x,y pixel to a color
+    // Set bar
+    LCD_drawBar(128/2, 128/2, 20, 1, RED); // Draw a line
+    LCD_drawBar(128/2, 128/2, 20, 0, CYAN); // Draw a line
     
-    // Pixel 128, 128
-    LCD_drawPixel(128, 128, CYAN); // set the x,y pixel to a color
-    
-    //Draw a bar
-    int ii = 0;
-    for(ii; ii <= 10; ii++){
-        LCD_drawPixel(0, ii, CYAN); // set the x,y pixel to a color
-        LCD_drawPixel(1, ii, CYAN); // set the x,y pixel to a color
-        LCD_drawPixel(2, ii, CYAN); // set the x,y pixel to a color
-        LCD_drawPixel(3, ii, CYAN); // set the x,y pixel to a color
-        LCD_drawPixel(4, ii, CYAN); // set the x,y pixel to a color
-        LCD_drawPixel(5, ii, CYAN); // set the x,y pixel to a color
-        LCD_drawPixel(6, ii, CYAN); // set the x,y pixel to a color
-    }
-    
+    //Write Hi!
     while(1) {
         delay_core_timer(1000);
         //LATAINV=0b10000;

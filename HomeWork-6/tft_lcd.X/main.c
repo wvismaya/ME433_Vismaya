@@ -109,7 +109,7 @@ int main() {
     unsigned short x0 = 28;
     unsigned short y0 = 32;
     int dd,len0;
-    unsigned short ij;
+    unsigned short total_time, ij;
     
     for(dd = 0; dd<1000000; dd++);
     LCD_writechar(x0, y0);
@@ -119,7 +119,7 @@ int main() {
         y0 = 32 + 15;
         len0 = 10;
         ij = 0;
-        
+        _CP0_SET_COUNT(0);
         while(x0<128){
         for(dd = 0; dd<1000000; dd++);
         //LCD_writeint(35, 20, 12345, BLACK);
@@ -137,7 +137,9 @@ int main() {
         LCD_writeint(35, 20, ij);
         ij--;
         }
-        
+        total_time = _CP0_GET_COUNT(); 
+        total_time = 2400000/(total_time*2);
+        LCD_writeint(50, 50, total_time);
         for(dd = 0; dd<1000000; dd++);
     }
 }

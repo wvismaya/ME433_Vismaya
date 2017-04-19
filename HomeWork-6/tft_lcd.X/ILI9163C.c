@@ -12,6 +12,9 @@
 // LED - 3.3V
 
 // B8 is turned into SDI1 but is not used or connected to anything
+#include <stdio.h>
+#include <stdlib.h>
+#include<stdio.h>
 
 #include <xc.h>
 #include "ILI9163C.h"
@@ -244,19 +247,51 @@ void LCD_clearScreen(unsigned short color) {
  * (if the start location is (126,125) 
  * you will run out of room in both the x and y directions).
  */
-void LCD_writechar(unsigned short x0, unsigned short y0, unsigned short charcode[13][5]){
-    int ii, jj, kk;
+
+void LCD_writechar(unsigned short x, unsigned short y){
+    char message[10];
     
-    for (kk = 0; kk < 13; kk++){
-    for (jj = 0; jj < 5; jj++){
+    sprintf(message,"Hello World");
+    int i,ii,jj;
+    i = 0; 
+    while(message[i]){
+        //printf("\n");
+        for (jj = 0; jj < 5; jj++){
         for (ii = 0; ii < 8; ii++){
-            if(0b00000001 & (charcode[kk][jj] >> ii)){
-                LCD_drawPixel(x0+jj+(kk*7), y0+ii, RED);   
+            if(0b00000001 & (ASCII[message[i]-0x20][jj] >> ii)){
+                LCD_drawPixel(x+jj+(i*7), y+ii, RED); 
             }
             else{
-                LCD_drawPixel(x0+jj+(kk*7), y0+ii, BLACK);
+                LCD_drawPixel(x+jj+(i*7), y+ii, BLACK);
             }
         }
+        ii = 0;
+        }
+        jj = 0;
+        i++;
     }
+}
+
+void LCD_writeint(unsigned short x, unsigned short y, unsigned short dispint){
+    char message[10];
+    
+    sprintf(message,"%d", dispint);
+    int i,ii,jj;
+    i = 0; 
+    while(message[i]){
+        //printf("\n");
+        for (jj = 0; jj < 5; jj++){
+        for (ii = 0; ii < 8; ii++){
+            if(0b00000001 & (ASCII[message[i]-0x20][jj] >> ii)){
+                LCD_drawPixel(x+jj+(i*7), y+ii, GREEN); 
+            }
+            else{
+                LCD_drawPixel(x+jj+(i*7), y+ii, BLACK);
+            }
+        }
+        ii = 0;
+        }
+        jj = 0;
+        i++;
     }
 }

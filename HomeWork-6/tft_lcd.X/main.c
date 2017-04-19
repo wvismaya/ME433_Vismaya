@@ -82,10 +82,8 @@ int main() {
     // Set bar
     //LCD_drawBar(128/2, 128/2, 20, 1, RED); // Draw a line; Vertical
     //LCD_drawBar(128/2, 128/2, 20, 0, CYAN); // Draw a line; Horizontal
-    
-    int x0 = 20;
-    int y0 = 20;
-    
+    /*
+        
     unsigned short charcode[13][5] = {
     {0x7f, 0x08, 0x08, 0x08, 0x7f} // 48 H
     ,{0x7f, 0x49, 0x49, 0x49, 0x41} // 45 E
@@ -100,27 +98,46 @@ int main() {
     ,{0x7f, 0x41, 0x41, 0x22, 0x1c} // 44 D
     ,{0x00, 0x00, 0x00, 0x00, 0x00} // 20 (space)
     ,{0x00, 0x00, 0x5f, 0x00, 0x00} // 21 !
-};
+    };
+    
+    unsigned short fpscode[2][5] = {
+     {0x42, 0x61, 0x51, 0x49, 0x46} // 32 2
+    ,{0x18, 0x14, 0x12, 0x7f, 0x10} // 34 4
+    };
+    */
     /*Write string of arbitary characters*/
-    LCD_writechar(x0, y0, charcode);
-    int len0;
-    int dd;
+    unsigned short x0 = 28;
+    unsigned short y0 = 32;
+    int dd,len0;
+    unsigned short ij;
+    
+    for(dd = 0; dd<1000000; dd++);
+    LCD_writechar(x0, y0);
     
     while(1) {
-        x0 = 20;
-        y0 = x0 + 15;
+        x0 = 28;
+        y0 = 32 + 15;
         len0 = 10;
+        ij = 0;
         
-        while(x0<100){
-            for(dd = 0; dd<1000000; dd++);
-         //LATAINV=0b10000;
-         //toggle_A_pin(4);
-         //while(PORTBbits.RB4); // Pin B4 is HIGH if pressed.
-         //Draw the slider
-         LCD_drawBar(x0, y0, len0, 0, CYAN); // Draw a line; Horizontal
-         x0 = x0 + len0;
-        }
+        while(x0<128){
         for(dd = 0; dd<1000000; dd++);
-        LCD_drawBar(20, 20+15, 100-20, 0, BLACK); // Draw a line; Horizontal
-    }  
+        //LCD_writeint(35, 20, 12345, BLACK);
+        LCD_drawBar(x0, y0, len0, 0, CYAN); // Draw a line; Horizontal
+        x0 = x0 + len0;
+        LCD_writeint(35, 20, ij);
+        ij++;
+        }
+
+        while(x0>28){
+        for(dd = 0; dd<1000000; dd++);
+        //LCD_writeint(35, 20, 12345, BLACK);
+        LCD_drawBar(x0, y0, len0, 0, BLACK); // Draw a line; Horizontal
+        x0 = x0 - len0;
+        LCD_writeint(35, 20, ij);
+        ij--;
+        }
+        
+        for(dd = 0; dd<1000000; dd++);
+    }
 }

@@ -168,6 +168,8 @@ static const char ASCII[96][5] = {
 #define _BARWIDTH 15
 #define _ALPHALEN 20
 #define _ALPHASPACE 4
+
+char writestring[] = "Hello World !";
 // Thus we can draw 32 bars horizontally and 32 bars vertically
 
 static unsigned char pGammaSet[15]= {0x36,0x29,0x12,0x22,0x1C,0x15,0x42,0xB7,0x2F,0x13,0x12,0x0A,0x11,0x0B,0x06};
@@ -182,5 +184,7 @@ void LCD_drawPixel(unsigned short, unsigned short, unsigned short); // set the x
 void LCD_drawBar(unsigned short, unsigned short, unsigned short, unsigned short, unsigned short); // Draw a line
 void LCD_setAddr(unsigned short, unsigned short, unsigned short, unsigned short); // set the memory address you are writing to
 void LCD_clearScreen(unsigned short); // set the color of every pixel
-void LCD_writechar(unsigned short x0, unsigned short y0, unsigned short charcode[1][5]);
+void LCD_writechar(unsigned short, unsigned short);
+void LCD_writeint(unsigned short, unsigned short, unsigned short);
+
 #endif

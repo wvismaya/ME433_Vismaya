@@ -93,10 +93,14 @@ int main() {
     unsigned short total_time, ij;
     
     for(dd = 0; dd<1000000; dd++);
-    LCD_writechar(x0, y0, "Vismaya");
+    LCD_writechar(45, 20, "IMU");
+    LCD_writechar(10, 32, "GYRO");
+    LCD_writechar(80, 32, "ACCL");
     
     unsigned char data1;
     unsigned char IMU_data[14];
+    
+    unsigned short temp_data, gyroX, gyroY, gyroZ, accX, accY, accZ;
             
     data1 = i2c_read(MCP23008, WHOAMI);
     //Test is device responds
@@ -115,5 +119,28 @@ int main() {
         ij = 0;
         
         i2c_master_multiread(MCP23008,0x20,14,IMU_data);
+        
+        temp_data = ((IMU_data[1]<<8)|IMU_data[0]) - 65400;
+        LCD_writeint(35, 1, temp_data);
+        
+        gyroX = (float)((signed short)((IMU_data[3]<<8)|IMU_data[2])/320.00);
+        LCD_writeint(10, 60, gyroX);
+        
+        gyroY = (float)((signed short)((IMU_data[5]<<8)|IMU_data[4])/320.00);
+        LCD_writeint(10, 80, gyroY);
+        
+        gyroZ = (float)((signed short)((IMU_data[7]<<8)|IMU_data[6])/320.00);
+        LCD_writeint(10, 100, gyroZ);
+        
+        accX = ((float)((signed short)((IMU_data[9]<<8)|IMU_data[8])/320.00)/32000.00)*9.8;
+        LCD_writeint(80, 60, 100*accX);
+        
+        accY = ((float)((signed short)((IMU_data[11]<<8)|IMU_data[10])/320.00)/32000.00)*9.8;
+        LCD_writeint(80, 80, 100*accY);
+        
+        accZ = ((float)((signed short)((IMU_data[13]<<8)|IMU_data[12])/320.00)/32000.00)*9.8;
+        LCD_writeint(80, 100, 100*accZ);
+        
+        for(dd = 0; dd<1000000; dd++);
     }  
 }

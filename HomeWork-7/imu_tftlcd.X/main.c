@@ -65,6 +65,11 @@ int main() {
     // disable JTAG to get pins back
     DDPCONbits.JTAGEN = 0; 
     
+    ANSELBbits.ANSB2 = 0;
+    ANSELBbits.ANSB3 = 0;
+    
+    //i2c_master_setup();
+    //i2c_write(MCP23008,0x05,0b00100000);
     //Initialize the blinky
     init_blinky();
     
@@ -74,12 +79,13 @@ int main() {
     //Initialize LCD interface
     LCD_init();
     
-    __builtin_enable_interrupts();
+    //Init I2C
+    i2c_master_setup();
+    
 
-    initExpander();
     // Set background color
     LCD_clearScreen(BLACK);
-    
+    __builtin_enable_interrupts();
     /*Write string of arbitary characters*/
     unsigned short x0 = 28;
     unsigned short y0 = 32;
@@ -87,36 +93,27 @@ int main() {
     unsigned short total_time, ij;
     
     for(dd = 0; dd<1000000; dd++);
-    LCD_writechar(x0, y0);
-   
+    LCD_writechar(x0, y0, "Vismaya");
+    
+    unsigned char data1;
+    unsigned char IMU_data[14];
+            
+    data1 = i2c_read(MCP23008, WHOAMI);
+    //Test is device responds
+    LCD_writeint(1, 1, data1);
+    
+    //Initialize the IMU
+    i2c_write(MCP23008,CTRL1_XL, 0b10000000); ///1000 for 1.66 kHz sample rate, 00 for 2g sensitivity, 00 for 400kHz baud
+    i2c_write(MCP23008,CTRL2_G,0b10000000); //1000 for 1.66 kHz, 00 for 245 dps sensitivity, 
+    i2c_write(MCP23008,CTRL3_C,0b00000100); //IF_INC bit 1 will enable the ability to read multiple registers
+    
     while(1) {
+        
         x0 = 28;
         y0 = 32 + 15;
         len0 = 10;
         ij = 0;
-        delay_core_timer(100000);
-        setExpander(0);
-        delay_core_timer(100000);
-        clearExpander(0);
-        while(getExpander(7)){
         
-        while(x0<128){
-        for(dd = 0; dd<1000000; dd++);
-        LCD_drawBar(x0, y0, len0, 0, CYAN); // Draw a line; Horizontal
-        x0 = x0 + len0;
-        LCD_writeint(35, 20, ij);
-        ij++;
-        }
-
-        while(x0>28){
-        for(dd = 0; dd<1000000; dd++);
-        LCD_drawBar(x0, y0, len0, 0, BLACK); // Draw a line; Horizontal
-        x0 = x0 - len0;
-        LCD_writeint(35, 20, ij);
-        ij--;
-        }
-        
-        }
-        delay_core_timer(100000);
+        i2c_master_multiread(MCP23008,0x20,14,IMU_data);
     }  
 }

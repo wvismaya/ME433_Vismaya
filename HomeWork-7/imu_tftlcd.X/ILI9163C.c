@@ -248,10 +248,10 @@ void LCD_clearScreen(unsigned short color) {
  * you will run out of room in both the x and y directions).
  */
 
-void LCD_writechar(unsigned short x, unsigned short y){
+void LCD_writechar(unsigned short x, unsigned short y, char s[]){
     char message[10];
     
-    sprintf(message,"Hello World");
+    sprintf(message, s);
     int i,ii,jj;
     i = 0; 
     while(message[i]){
@@ -259,10 +259,10 @@ void LCD_writechar(unsigned short x, unsigned short y){
         for (jj = 0; jj < 5; jj++){
         for (ii = 0; ii < 8; ii++){
             if(0b00000001 & (ASCII[message[i]-0x20][jj] >> ii)){
-                LCD_drawPixel(x+jj+(i*7), y+ii, RED); 
+                LCD_drawPixel(x+jj+(i*6), y+ii, RED); 
             }
             else{
-                LCD_drawPixel(x+jj+(i*7), y+ii, BLACK);
+                LCD_drawPixel(x+jj+(i*6), y+ii, BLACK);
             }
         }
         ii = 0;

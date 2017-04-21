@@ -8,6 +8,12 @@
 #ifndef I2C_H
 #define	I2C_H
 
+#define MCP23008 0b01101011
+#define WHOAMI 0x0F
+#define CTRL1_XL 0x10
+#define CTRL2_G 0x11
+#define CTRL3_C 0x12
+
 // Header file for i2c_master_noint.c
 // helps implement use I2C1 as a master without using interrupts
 
@@ -28,5 +34,6 @@ void setExpander(int pin);
 void clearExpander(int pinNumber);
 unsigned char getExpander(int pinNumber);              // send a stop
 
+void i2c_master_multiread(unsigned char ADDRESS,unsigned char REGISTER,int length,unsigned char *data);
 #endif	/* I2C_H */
 

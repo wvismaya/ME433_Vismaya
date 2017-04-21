@@ -9,8 +9,8 @@
 
 #include"blinky.h"
 #include"i2c.h"
+#include "ILI9163C.h"
 
-#define MCP23008 0b00100000
 #define WRITE 0
 #define READ 1
 
@@ -37,12 +37,15 @@ void i2c_master_send(unsigned char byte) { // send a byte to slave
   while(I2C2STATbits.TRSTAT) { ; }  // wait for the transmission to finish
   if(I2C2STATbits.ACKSTAT) {        // if this is high, slave has not acknowledged
     // ("I2C2 Master: failed to receive ACK\r\n");
+      LCD_writechar(60, 60, "Could not send start");
   }
 }
 
 unsigned char i2c_master_recv(void) { // receive a byte from the slave
     I2C2CONbits.RCEN = 1;             // start receiving data
-    while(!I2C2STATbits.RBF) { ; }    // wait to receive the data
+    //LCD_writechar(50, 50, "Stuck in while");
+    while(!I2C2STATbits.RBF) {;}    // wait to receive the data
+    //LCD_writechar(50, 50, "Out of while");
     return I2C2RCV;                   // read and return the data
 }
 
@@ -103,8 +106,32 @@ unsigned char i2c_read(unsigned char ADDRESS,unsigned char REGISTER){
     i2c_master_send(REGISTER);
     i2c_master_restart();
     i2c_master_send((ADDRESS<<1)|READ);
+    //LCD_writechar(50, 50, "Address");
     r = i2c_master_recv();
+    //LCD_writechar(50, 50, "Waiting for ACK");
     i2c_master_ack(1);
+    //LCD_writechar(50, 50, "Got ACK");
     i2c_master_stop();
+    //LCD_writechar(50, 50, "Stopped");
 return r;
+}
+
+void i2c_master_multiread(unsigned char ADDRESS,unsigned char REGISTER,int length,unsigned char *data)
+{
+        i2c_master_start();
+        i2c_master_send(ADDRESS<<1);
+        i2c_master_send(REGISTER);
+        i2c_master_restart();
+        i2c_master_send(ADDRESS<<1|1);
+       
+        int i=1;
+        while (i<length){       
+        data[i-1] = i2c_master_recv();
+        i2c_master_ack(0);
+        i++;
+        }
+        
+        data[length-1] = i2c_master_recv();
+        i2c_master_ack(1);
+        i2c_master_stop();               
 }

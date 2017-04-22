@@ -185,6 +185,7 @@ void LCD_drawBar(unsigned short, unsigned short, unsigned short, unsigned short,
 void LCD_setAddr(unsigned short, unsigned short, unsigned short, unsigned short); // set the memory address you are writing to
 void LCD_clearScreen(unsigned short); // set the color of every pixel
 void LCD_writechar(unsigned short, unsigned short, char s[]);
-void LCD_writeint(unsigned short, unsigned short, unsigned short);
+void LCD_writeint(unsigned short, unsigned short,float);
+void LCD_clear(unsigned short, unsigned short);
 
 #endif

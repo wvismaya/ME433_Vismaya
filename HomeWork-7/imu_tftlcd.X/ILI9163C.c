@@ -248,9 +248,34 @@ void LCD_clearScreen(unsigned short color) {
  * you will run out of room in both the x and y directions).
  */
 
-void LCD_writechar(unsigned short x, unsigned short y, char s[]){
+
+void LCD_clear(unsigned short x, unsigned short y){
     char message[10];
     
+    sprintf(message, "00000000");
+    int i,ii,jj;
+    i = 0; 
+    while(message[i]){
+        //printf("\n");
+        for (jj = 0; jj < 5; jj++){
+        for (ii = 0; ii < 8; ii++){
+            if(0b00000001 & (ASCII[message[i]-0x20][jj] >> ii)){
+                LCD_drawPixel(x+jj+(i*6), y+ii, BLACK); 
+            }
+            else{
+                LCD_drawPixel(x+jj+(i*6), y+ii, BLACK);
+            }
+        }
+        ii = 0;
+        }
+        jj = 0;
+        i++;
+    }
+}
+
+void LCD_writechar(unsigned short x, unsigned short y, char s[]){
+    char message[10];
+    LCD_clear(x, y);
     sprintf(message, s);
     int i,ii,jj;
     i = 0; 
@@ -272,10 +297,10 @@ void LCD_writechar(unsigned short x, unsigned short y, char s[]){
     }
 }
 
-void LCD_writeint(unsigned short x, unsigned short y, unsigned short dispint){
+void LCD_writeint(unsigned short x, unsigned short y, float dispint){
     char message[10];
-    
-    sprintf(message,"%d", dispint);
+    LCD_clear(x, y);
+    sprintf(message,"%4.3f", dispint);
     int i,ii,jj;
     i = 0; 
     while(message[i]){

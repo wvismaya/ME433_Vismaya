@@ -99,6 +99,7 @@ int main() {
     
     unsigned char data1;
     unsigned char IMU_data[14];
+    char snum[10];
     
     unsigned short temp_data, gyroX, gyroY, gyroZ, accX, accY, accZ;
             
@@ -122,24 +123,25 @@ int main() {
         
         temp_data = ((IMU_data[1]<<8)|IMU_data[0]) - 65400;
         LCD_writeint(35, 1, temp_data);
+        // convert 123 to string [buf]
         
         gyroX = (float)((signed short)((IMU_data[3]<<8)|IMU_data[2])/320.00);
         LCD_writeint(10, 60, gyroX);
         
-        gyroY = (float)((signed short)((IMU_data[5]<<8)|IMU_data[4])/320.00);
+        gyroY = (float)((signed short)((IMU_data[5]<<8)|IMU_data[4])/320.00)*(360/65535);
         LCD_writeint(10, 80, gyroY);
         
-        gyroZ = (float)((signed short)((IMU_data[7]<<8)|IMU_data[6])/320.00);
+        gyroZ = (float)((signed short)((IMU_data[7]<<8)|IMU_data[6])/320.00)*(360/65535);
         LCD_writeint(10, 100, gyroZ);
         
-        accX = ((float)((signed short)((IMU_data[9]<<8)|IMU_data[8])/1.00)/32000.00)*9.8;
-        LCD_writeint(80, 60, 100*accX);
+        accX = ((float)((signed short)((IMU_data[9]<<8)|IMU_data[8])/1.00)/32000.00)*(9.8);
+        LCD_writeint(80, 60, accX);
         
-        accY = ((float)((signed short)((IMU_data[11]<<8)|IMU_data[10])/1.00)/32000.00)*9.8;
-        LCD_writeint(80, 80, 100*accY);
+        accY = ((float)((signed short)((IMU_data[11]<<8)|IMU_data[10])/1.00)/32000.00)*(9.8/65535.0);
+        LCD_writeint(80, 80, accY);
         
-        accZ = ((float)((signed short)((IMU_data[13]<<8)|IMU_data[12])/1.00)/32000.00)*9.8;
-        LCD_writeint(80, 100, 100*accZ);
+        accZ = ((float)((signed short)((IMU_data[13]<<8)|IMU_data[12])/1.00)/32000.00)*(9.8/65535.0);
+        LCD_writeint(80, 100, accZ);
         
         for(dd = 0; dd<1000000; dd++);
     }  

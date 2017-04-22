@@ -132,13 +132,13 @@ int main() {
         gyroZ = (float)((signed short)((IMU_data[7]<<8)|IMU_data[6])/320.00);
         LCD_writeint(10, 100, gyroZ);
         
-        accX = ((float)((signed short)((IMU_data[9]<<8)|IMU_data[8])/320.00)/32000.00)*9.8;
+        accX = ((float)((signed short)((IMU_data[9]<<8)|IMU_data[8])/1.00)/32000.00)*9.8;
         LCD_writeint(80, 60, 100*accX);
         
-        accY = ((float)((signed short)((IMU_data[11]<<8)|IMU_data[10])/320.00)/32000.00)*9.8;
+        accY = ((float)((signed short)((IMU_data[11]<<8)|IMU_data[10])/1.00)/32000.00)*9.8;
         LCD_writeint(80, 80, 100*accY);
         
-        accZ = ((float)((signed short)((IMU_data[13]<<8)|IMU_data[12])/320.00)/32000.00)*9.8;
+        accZ = ((float)((signed short)((IMU_data[13]<<8)|IMU_data[12])/1.00)/32000.00)*9.8;
         LCD_writeint(80, 100, 100*accZ);
         
         for(dd = 0; dd<1000000; dd++);

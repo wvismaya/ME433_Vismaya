@@ -66,6 +66,8 @@ uint8_t APP_MAKE_BUFFER_DMA_READY dataOut[APP_READ_BUFFER_SIZE];
 uint8_t APP_MAKE_BUFFER_DMA_READY readBuffer[APP_READ_BUFFER_SIZE];
 int len, i, jj,ii = 0;
 unsigned char data1;
+float temp_data, gyroX, gyroY, gyroZ, accX, accY, accZ;
+unsigned char IMU_data[14];
 int startTime = 0;
 
 // *****************************************************************************
@@ -350,6 +352,13 @@ void APP_Initialize(void) {
     
     //Init I2C
     i2c_master_setup();
+            
+    //data1 = i2c_read(MCP23008, WHOAMI);
+    
+    //Initialize the IMU
+    i2c_write(MCP23008,CTRL1_XL, 0b10000000); ///1000 for 1.66 kHz sample rate, 00 for 2g sensitivity, 00 for 400kHz baud
+    i2c_write(MCP23008,CTRL2_G,0b10000000); //1000 for 1.66 kHz, 00 for 245 dps sensitivity, 
+    i2c_write(MCP23008,CTRL3_C,0b00000100); //IF_INC bit 1 will enable the ability to read multiple registers
 
     startTime = _CP0_GET_COUNT();
 }
@@ -461,12 +470,38 @@ void APP_Tasks(void) {
                           
                 if(*appData.readBuffer == 'r'){
                     for(jj = 0; jj <10; jj++){
-                        data1 = i2c_read(MCP23008, WHOAMI);
-                        len = sprintf(dataOut, "%d\r\n", data1);
+                        //data1 = i2c_read(MCP23008, WHOAMI);
+                        
+                        i2c_master_multiread(MCP23008,0x20,14,IMU_data);
+                        
+                        accX = ( (IMU_data[9] << 8)|IMU_data[8] )*0.061 - 40;
+                        
+                        len = sprintf(dataOut, "%4.3f\r\n", accX);
                         USB_DEVICE_CDC_Write(USB_DEVICE_CDC_INDEX_0,
                                 &appData.writeTransferHandle, dataOut, len,
                                 USB_DEVICE_CDC_TRANSFER_FLAGS_DATA_COMPLETE);
                         for(ii=0; ii<1000000; ii++);
+                        
+                        accY = ( 65535 - (IMU_data[11] << 8)|IMU_data[10] )*0.061 - 25;
+                        len = sprintf(dataOut, "%4.3f\r\n", accY);
+                        USB_DEVICE_CDC_Write(USB_DEVICE_CDC_INDEX_0,
+                                &appData.writeTransferHandle, dataOut, len,
+                                USB_DEVICE_CDC_TRANSFER_FLAGS_DATA_COMPLETE);
+                        for(ii=0; ii<1000000; ii++);
+                        
+                        accZ = (( 65535 - (IMU_data[13] << 8)|IMU_data[12] )*0.061)/ 980 + 9.8;
+                        len = sprintf(dataOut, "%4.3f\r\n", accZ);
+                        USB_DEVICE_CDC_Write(USB_DEVICE_CDC_INDEX_0,
+                                &appData.writeTransferHandle, dataOut, len,
+                                USB_DEVICE_CDC_TRANSFER_FLAGS_DATA_COMPLETE);
+                        for(ii=0; ii<1000000; ii++);
+                        
+                        len = sprintf(dataOut, "%d\r\n", 0);
+                        USB_DEVICE_CDC_Write(USB_DEVICE_CDC_INDEX_0,
+                                &appData.writeTransferHandle, dataOut, len,
+                                USB_DEVICE_CDC_TRANSFER_FLAGS_DATA_COMPLETE);
+                        for(ii=0; ii<100000000; ii++);
+                                                                        
                         startTime = _CP0_GET_COUNT();
                     }
                 }

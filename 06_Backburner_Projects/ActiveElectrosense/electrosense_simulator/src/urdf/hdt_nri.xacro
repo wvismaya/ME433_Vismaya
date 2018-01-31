@@ -1,0 +1,703 @@
+<?xml version="1.0"?>
+<robot name="hdt_nri" xmlns:xacro="http://www.ros.org/wiki/xacro">
+
+	<!-- constants -->
+	<xacro:property name="PI" value="3.1415926535897931"/>
+
+	<!-- <xacro:macro name="hinge_angle" params="${PI}"/> -->
+	<xacro:arg name="hinge_angle" default="1.57"/>
+
+	<!-- materials -->
+	<material name="titanium">
+		<color rgba="${175/255} ${168/255} ${163/255} 1.0"/>
+	</material>
+
+	<material name="yellow">
+		<color rgba="${255/255} ${189/255} ${13/255} 1.0"/>
+	</material>
+
+	<material name="green">
+		<color rgba="${0/255} ${50/255} ${0/255} 1.0"/>
+	</material>
+
+	<material name="white">
+		<color rgba="${255/255} ${255/255} ${255/255} 1.0"/>
+	</material>
+
+	<material name="grey">
+		<color rgba="${64/255} ${64/255} ${64/255} 1.0"/>
+	</material>
+
+	<material name="grey_trans">
+		<color rgba="${64/255} ${64/255} ${64/255} .8"/>
+	</material>
+
+	<link name="world"/>
+
+	<!-- tank -->
+	<joint name="tank" type="fixed">
+		<origin xyz="0 0 0" rpy="${PI/2} 0 0"/>
+		<parent link="world"/>
+		<child link="tank"/>
+	</joint>
+
+	<link name="tank">
+		<collision>
+			<origin xyz="0 0 0.0" rpy="0 0 0"/>
+			<geometry>
+				<mesh filename="package://hdt_nri_description/meshes/tank.STL"/>
+			</geometry>
+		</collision>
+
+		<visual>
+			<origin xyz="0 0 0" rpy="0 0 0"/>
+			<geometry>
+				<mesh filename="package://hdt_nri_description/meshes/tank.STL"/>
+			</geometry>
+			<material name="grey_trans"/>
+		</visual>
+	</link>
+
+	<!-- gantry_PX -->
+	<joint name="gantry_mount" type="fixed">
+		<origin xyz="0 .9520 -.5" rpy="0 0 0"/>
+		<parent link="tank"/>
+		<child link="gantry_x"/>
+	</joint>
+
+	<link name="gantry_x">
+		<collision>
+			<origin xyz="0 0 0" rpy="0 0 0"/>
+			<geometry>
+				<mesh filename="package://hdt_nri_description/meshes/gantry_PX.STL"/>
+			</geometry>
+		</collision>
+
+		<visual>
+			<origin xyz="0 0 0" rpy="0 0 0"/>
+			<geometry>
+				<mesh filename="package://hdt_nri_description/meshes/gantry_PX.STL"/>
+			</geometry>
+			<material name="grey"/>
+		</visual>
+	</link>
+
+	<!-- gantry_PY -->
+	<joint name="gantryX" type="prismatic">
+		<origin xyz="0 .1035 0" rpy="0 0 0"/>
+		<parent link="gantry_x"/>
+		<child link="gantry_y"/>
+		<axis xyz="0 0 1"/>
+		<limit effort="60.0" lower="-1.25" upper="1.25" velocity="2.0944"/>
+		<dynamics damping="0.7" friction="0.0"/>
+		<hdt id="127" kmin="50" kmax="100" inertia="0.05"/>
+	</joint>
+
+	<link name="gantry_y">
+		<collision>
+			<origin xyz="0 0 0" rpy="0 0 0"/>
+			<geometry>
+				<mesh filename="package://hdt_nri_description/meshes/gantry_PY.STL"/>
+			</geometry>
+		</collision>
+
+		<visual>
+			<origin xyz="0 0 0" rpy="0 0 0"/>
+			<geometry>
+				<mesh filename="package://hdt_nri_description/meshes/gantry_PY.STL"/>
+			</geometry>
+			<material name="grey"/>
+		</visual>
+	</link>
+
+	<!-- gantry_PZ -->
+	<joint name="gantryY" type="prismatic">
+		<origin xyz="0 .1472 0" rpy="0 0 0"/>
+		<parent link="gantry_y"/>
+		<child link="gantry_z"/>
+		<axis xyz="1 0 0"/>
+		<limit effort="60.0" lower="-.5" upper=".5" velocity="2.0944"/>
+		<dynamics damping="0.7" friction="0.0"/>
+		<hdt id="127" kmin="50" kmax="100" inertia="0.05"/>
+	</joint>
+
+	<link name="gantry_z">
+		<collision>
+			<origin xyz="0 0 0" rpy="0 0 0"/>
+			<geometry>
+				<mesh filename="package://hdt_nri_description/meshes/gantry_PZ.STL"/>
+			</geometry>
+		</collision>
+
+		<visual>
+			<origin xyz="0 0 0" rpy="0 0 0"/>
+			<geometry>
+				<mesh filename="package://hdt_nri_description/meshes/gantry_PZ.STL"/>
+			</geometry>
+			<material name="grey"/>
+		</visual>
+	</link>
+
+	<!-- gantry_PZ -->
+	<joint name="gantryZ" type="prismatic">
+		<origin xyz=".1 .650 .161" rpy="0 0 0"/>
+		<parent link="gantry_z"/>
+		<child link="gantry_yaw"/>
+		<axis xyz="0 1 0"/>
+		<limit effort="60.0" lower="-.65" upper=".65" velocity="2.0944"/>
+		<dynamics damping="0.7" friction="0.0"/>
+		<hdt id="127" kmin="50" kmax="100" inertia="0.05"/>
+	</joint>
+
+	<link name="gantry_yaw">
+		<collision>
+			<origin xyz="0 0 0" rpy="0 0 0"/>
+			<geometry>
+				<mesh filename="package://hdt_nri_description/meshes/gantry_Yaw.STL"/>
+			</geometry>
+		</collision>
+
+		<visual>
+			<origin xyz="0 0 0" rpy="0 0 0"/>
+			<geometry>
+				<mesh filename="package://hdt_nri_description/meshes/gantry_Yaw.STL"/>
+			</geometry>
+			<material name="grey"/>
+		</visual>
+	</link>
+
+	<!-- mounting_plate -->
+	<joint name="gantryYaw" type="revolute">
+		<origin xyz="0 -1.223 0.23" rpy="${PI} 0 0"/>
+		<parent link="gantry_yaw"/>
+		<child link="mounting_plate"/>
+		<axis xyz="0 1 0"/>
+		<limit effort="60.0" lower="${-PI}" upper="${PI}" velocity="2.0944"/>
+		<dynamics damping="0.7" friction="0.0"/>
+		<hdt id="127" kmin="50" kmax="100" inertia="0.05"/>
+	</joint>
+
+	<link name="mounting_plate">
+		<collision>
+			<origin xyz="0 0 0.0" rpy="0 0 0"/>
+			<geometry>
+				<mesh filename="package://hdt_nri_description/meshes/elbow_light.STL"/>
+			</geometry>
+		</collision>
+
+		<visual>
+			<origin xyz="0 0 0" rpy="0 0 0"/>
+			<geometry>
+				<mesh filename="package://hdt_nri_description/meshes/elbow_light.STL"/>
+			</geometry>
+			<material name="grey"/>
+		</visual>
+	</link>
+
+	<!-- elbow hinge -->
+	<joint name="elbow" type="fixed">
+		<origin xyz="0 0 0" rpy="-$(arg hinge_angle) 0 ${PI}"/> <!--${PI} as yaw-->
+		<parent link="mounting_plate"/>
+		<child link="elbow"/>
+	</joint>
+
+	<link name="elbow">
+		<collision>
+			<origin xyz="0 0 0.0" rpy="0 0 0"/>
+			<geometry>
+				<mesh filename="package://hdt_nri_description/meshes/elbow_light.STL"/>
+			</geometry>
+		</collision>
+
+		<visual>
+			<origin xyz="0 0 0" rpy="0 0 0"/>
+			<geometry>
+				<mesh filename="package://hdt_nri_description/meshes/elbow_light.STL"/>
+			</geometry>
+			<material name="grey"/>
+		</visual>
+	</link>
+
+	<!-- segment 1 -->
+	<joint name="joint1" type="revolute">
+		<hdt id="1" kmin="50" kmax="100" inertia="0.05"/>
+		<axis xyz="0 1 0"/>
+		<limit effort="60.0" lower="-2.0944" upper="2.0944" velocity="2.0944"/>
+		<origin xyz="0 -.068 0" rpy="0 0 0"/> <!--Here arm has no pitch (=0), just added for experiments.-->
+		<parent link="elbow"/>
+		<child link="link1"/>
+		<dynamics damping="0.7" friction="0.0"/>
+	</joint>
+
+	<transmission name="tran1">
+		<type>transmission_interface/SimpleTransmission</type>
+		<joint name="joint1">
+			<hardwareInterface>EffortJointInterface</hardwareInterface>
+		</joint>
+		<actuator name="motor1">
+			<mechanicalReduction>1</mechanicalReduction>
+		</actuator>
+	</transmission>
+
+	<link name="link1">
+		<collision>
+			<origin xyz="0 0 0.0" rpy="0 0 0"/>
+			<geometry>
+				<mesh filename="package://hdt_nri_description/meshes/hdt_mk3_m_5.STL"/>
+			</geometry>
+		</collision>
+
+		<visual>
+			<origin xyz="0 0 0" rpy="0 0 0"/>
+			<geometry>
+				<mesh filename="package://hdt_nri_description/meshes/hdt_mk3_m_5.STL"/>
+			</geometry>
+			<material name="yellow"/>
+		</visual>
+	</link>
+
+	<joint name="joint1f" type="fixed">
+		<origin xyz="0 -0.08651 0" rpy="0 0 0"/>
+		<parent link="link1"/>
+		<child link="link2a"/>
+	</joint>
+
+	<link name="link2a">
+		<collision>
+			<origin xyz="0 0 0" rpy="0 0 0"/>
+			<geometry>
+				<mesh filename="package://hdt_nri_description/meshes/hdt_mk3_m_6a.STL"/>
+			</geometry>
+		</collision>
+
+		<visual>
+			<origin xyz="0 0 0.0" rpy="0 0 0"/>
+			<geometry>
+				<mesh filename="package://hdt_nri_description/meshes/hdt_mk3_m_6a.STL"/>
+			</geometry>
+			<material name="titanium"/>
+		</visual>
+	</link>
+
+	<!-- segment 6 -->
+	<joint name="joint2" type="revolute">
+		<hdt id="2" kmin="50" kmax="100" inertia="0.05"/>
+		<axis xyz="1 0 0"/>
+		<limit effort="60.0" lower="-1.5708" upper="1.5708" velocity="2.0944"/>
+		<origin xyz="0.02393 -0.0510 0" rpy="0 0 0"/>
+		<parent link="link2a"/>
+		<child link="link2b"/>
+		<dynamics damping="0.7" friction="0.0"/>
+	</joint>
+
+	<transmission name="tran2">
+		<type>transmission_interface/SimpleTransmission</type>
+		<joint name="joint2">
+			<hardwareInterface>EffortJointInterface</hardwareInterface>
+		</joint>
+		<actuator name="motor2">
+			<mechanicalReduction>1</mechanicalReduction>
+		</actuator>
+	</transmission>
+
+	<link name="link2b">
+		<collision>
+			<origin xyz="0 0 0" rpy="0 0 0"/>
+			<geometry>
+				<mesh filename="package://hdt_nri_description/meshes/hdt_mk3_m_6b.STL"/>
+			</geometry>
+		</collision>
+
+		<visual>
+			<origin xyz="0 0 0.0" rpy="0 0 0"/>
+			<geometry>
+				<mesh filename="package://hdt_nri_description/meshes/hdt_mk3_m_6b.STL"/>
+			</geometry>
+			<material name="titanium"/>
+		</visual>
+	</link>
+
+	<!-- segment 7 -->
+	<joint name="joint3" type="revolute">
+		<hdt id="3" kmin="50" kmax="100" inertia="0.05"/>
+		<axis xyz="0 0 1"/>
+		<limit effort="60.0" lower="-1.5708" upper="1.5708" velocity="2.0944"/>
+		<origin xyz="-0.02395 -0.08200 -0.0279" rpy="0 0 0"/>
+		<parent link="link2b"/>
+		<child link="link3"/>
+		<dynamics damping="0.7" friction="0.0"/>
+	</joint>
+
+	<transmission name="tran3">
+		<type>transmission_interface/SimpleTransmission</type>
+		<joint name="joint3">
+			<hardwareInterface>EffortJointInterface</hardwareInterface>
+		</joint>
+		<actuator name="motor3">
+			<mechanicalReduction>1</mechanicalReduction>
+		</actuator>
+	</transmission>
+
+	<link name="link3">
+		<collision>
+			<origin xyz="0 0 0" rpy="0 0 0"/>
+			<geometry>
+				<mesh filename="package://hdt_nri_description/meshes/hdt_mk3_m_7.STL"/>
+			</geometry>
+		</collision>
+
+		<visual>
+			<origin xyz="0 0 0.0" rpy="0 0 0"/>
+			<geometry>
+				<mesh filename="package://hdt_nri_description/meshes/hdt_mk3_m_7.STL"/>
+			</geometry>
+			<material name="titanium"/>
+		</visual>
+	</link>
+	
+	<!-- palm -->
+	<joint name="palm" type="fixed">
+		<origin xyz="-0.00001 -0.0700 0.02793" rpy="0 0 0"/>
+		<parent link="link3"/>
+		<child link="palm"/>
+	</joint>
+
+	<link name="palm">
+		<collision>
+			<origin xyz="0 0 0" rpy="0 0 0"/>
+			<geometry>
+				<mesh filename="package://hdt_nri_description/meshes/hdt_mk3_m_palm.STL"/>
+			</geometry>
+		</collision>
+
+		<visual>
+			<origin xyz="0 0 0.0" rpy="0 0 0"/>
+			<geometry>
+				<mesh filename="package://hdt_nri_description/meshes/hdt_mk3_m_palm.STL"/>
+			</geometry>
+			<material name="titanium"/>
+		</visual>
+	</link>
+
+	<!-- thumb base -->
+	<joint name="thumb_base" type="revolute">
+		<hdt id="10" kmin="10" kmax="2" inertia="0.01"/>
+		<axis xyz="0 1 0"/>
+		<limit effort="4.0" lower="0" upper="1.5708" velocity="4.1888"/>
+		<origin xyz="-0.0000362 -0.0580 0.017785" rpy="0 0 0"/>
+		<parent link="palm"/>
+		<child link="thumb_base"/>
+		<dynamics damping="0.7" friction="0.0"/>
+	</joint>
+
+	<transmission name="tran10">
+		<type>transmission_interface/SimpleTransmission</type>
+		<joint name="thumb_base">
+			<hardwareInterface>EffortJointInterface</hardwareInterface>
+		</joint>
+		<actuator name="motor10">
+			<mechanicalReduction>1</mechanicalReduction>
+		</actuator>
+	</transmission>
+
+	<link name="thumb_base">
+		<collision>
+			<origin xyz="0 0 0" rpy="0 0 0"/>
+			<geometry>
+				<mesh filename="package://hdt_nri_description/meshes/hdt_mk3_m_thumb_base.STL"/>
+			</geometry>
+		</collision>
+
+		<visual>
+			<origin xyz="0 0 0" rpy="0 0 0"/>
+			<geometry>
+				<mesh filename="package://hdt_nri_description/meshes/hdt_mk3_m_thumb_base.STL"/>
+			</geometry>
+			<material name="titanium"/>
+		</visual>
+	</link>
+
+	<!-- thumb pad -->
+	<joint name="thumb_pad" type="fixed">
+		<origin xyz="0 0 0" rpy="0 0 0"/>
+		<parent link="thumb_base"/>
+		<child link="thumb_pad"/>
+	</joint>
+
+	<link name="thumb_pad">
+		<collision>
+			<origin xyz="0 0 0" rpy="0 0 0"/>
+			<geometry>
+				<mesh filename="package://hdt_nri_description/meshes/hdt_mk3_m_thumb_pad.STL"/>
+			</geometry>
+		</collision>
+
+		<visual>
+			<origin xyz="0 0 0.0" rpy="0 0 0"/>
+			<geometry>
+				<mesh filename="package://hdt_nri_description/meshes/hdt_mk3_m_thumb_pad.STL"/>
+			</geometry>
+			<material name="yellow"/>
+		</visual>
+	</link>
+
+	<!-- thumb prox -->
+	<joint name="thumb_prox" type="revolute">
+		<hdt id="11" kmin="10" kmax="2" inertia="0.01"/>
+		<axis xyz="1 0 0"/>
+		<limit effort="4.0" lower="0" upper="1.5708" velocity="4.1888"/>
+		<origin xyz="0.00879 -0.021848 0.057028" rpy="0 0 0"/>
+		<parent link="thumb_base"/>
+		<child link="thumb_prox"/>
+		<dynamics damping="0.7" friction="0.0"/>
+	</joint>
+
+	<transmission name="tran11">
+		<type>transmission_interface/SimpleTransmission</type>
+		<joint name="thumb_prox">
+			<hardwareInterface>EffortJointInterface</hardwareInterface>
+		</joint>
+		<actuator name="motor11">
+			<mechanicalReduction>1</mechanicalReduction>
+		</actuator>
+	</transmission>
+
+	<link name="thumb_prox">
+		<collision>
+			<origin xyz="0 0 0" rpy="0 0 0"/>
+			<geometry>
+				<mesh filename="package://hdt_nri_description/meshes/hdt_mk3_m_thumb_prox.STL"/>
+			</geometry>
+		</collision>
+
+		<visual>
+			<origin xyz="0 0 0" rpy="0 0 0"/>
+			<geometry>
+				<mesh filename="package://hdt_nri_description/meshes/hdt_mk3_m_thumb_prox.STL"/>
+			</geometry>
+			<material name="yellow"/>
+		</visual>
+	</link>
+
+	<!-- thumb med -->
+	<joint name="thumb_med" type="fixed">
+		<origin xyz="0 -0.0005 0.0435" rpy="0 0 0"/>
+		<parent link="thumb_prox"/>
+		<child link="thumb_med"/>
+	</joint>
+
+	<link name="thumb_med">
+		<collision>
+			<origin xyz="0 0 0" rpy="0 0 0"/>
+			<geometry>
+				<mesh filename="package://hdt_nri_description/meshes/hdt_mk3_m_thumb_med.STL"/>
+			</geometry>
+		</collision>
+
+		<visual>
+			<origin xyz="0 0 0" rpy="0 0 0"/>
+			<geometry>
+				<mesh filename="package://hdt_nri_description/meshes/hdt_mk3_m_thumb_med.STL"/>
+			</geometry>
+			<material name="white"/>
+		</visual>
+	</link>
+
+	<!-- thumb dist -->
+	<joint name="thumb_dist" type="fixed">
+		<origin xyz="0 -0.00045 0.0277" rpy="0 0 0"/>
+		<parent link="thumb_med"/>
+		<child link="thumb_dist"/>
+	</joint>
+
+	<link name="thumb_dist">
+		<collision>
+			<origin xyz="0 0 0" rpy="0 0 0"/>
+			<geometry>
+				<mesh filename="package://hdt_nri_description/meshes/hdt_mk3_m_thumb_dist.STL"/>
+			</geometry>
+		</collision>
+
+		<visual>
+			<origin xyz="0 0 0" rpy="0 0 0"/>
+			<geometry>
+				<mesh filename="package://hdt_nri_description/meshes/hdt_mk3_m_thumb_dist.STL"/>
+			</geometry>
+			<material name="yellow"/>
+		</visual>
+	</link>
+
+	<!-- index prox -->
+	<joint name="index_prox" type="revolute">
+		<hdt id="12" kmin="10" kmax="2" inertia="0.01"/>
+		<axis xyz="0 0 1"/>
+		<limit effort="4.0" lower="0" upper="1.5708" velocity="4.1888"/>
+		<origin xyz="-0.0000362 -0.165998 0.0357953" rpy="0 0 0"/>
+		<parent link="palm"/>
+		<child link="index_prox"/>
+		<dynamics damping="0.7" friction="0.0"/>
+	</joint>
+
+	<transmission name="tran12">
+		<type>transmission_interface/SimpleTransmission</type>
+		<joint name="index_prox">
+			<hardwareInterface>EffortJointInterface</hardwareInterface>
+		</joint>
+		<actuator name="motor12">
+			<mechanicalReduction>1</mechanicalReduction>
+		</actuator>
+	</transmission>
+
+	<link name="index_prox">
+		<collision>
+			<origin xyz="0 0 0" rpy="0 0 0"/>
+			<geometry>
+				<mesh filename="package://hdt_nri_description/meshes/hdt_mk3_m_finger_prox.STL"/>
+			</geometry>
+		</collision>
+
+		<visual>
+			<origin xyz="0 0 0" rpy="0 0 0"/>
+			<geometry>
+				<mesh filename="package://hdt_nri_description/meshes/hdt_mk3_m_finger_prox.STL"/>
+			</geometry>
+			<material name="yellow"/>
+		</visual>
+	</link>
+
+	<!-- index med -->
+	<joint name="index_med" type="fixed">
+		<origin xyz="-0.0005 -0.0435 0" rpy="0 0 0"/>
+		<parent link="index_prox"/>
+		<child link="index_med"/>
+	</joint>
+
+	<link name="index_med">
+		<collision>
+			<origin xyz="0 0 0" rpy="0 0 0"/>
+			<geometry>
+				<mesh filename="package://hdt_nri_description/meshes/hdt_mk3_m_finger_med.STL"/>
+			</geometry>
+		</collision>
+
+		<visual>
+			<origin xyz="0 0 0" rpy="0 0 0"/>
+			<geometry>
+				<mesh filename="package://hdt_nri_description/meshes/hdt_mk3_m_finger_med.STL"/>
+			</geometry>
+			<material name="white"/>
+		</visual>
+	</link>
+
+	<!-- index dist -->
+	<joint name="index_dist" type="fixed">
+		<origin xyz="0.00045 -0.0277 0" rpy="0 0 0"/>
+		<parent link="index_med"/>
+		<child link="index_dist"/>
+	</joint>
+
+	<link name="index_dist">
+		<collision>
+			<origin xyz="0 0 0" rpy="0 0 0"/>
+			<geometry>
+				<mesh filename="package://hdt_nri_description/meshes/hdt_mk3_m_finger_dist.STL"/>
+			</geometry>
+		</collision>
+
+		<visual>
+			<origin xyz="0 0 0" rpy="0 0 0"/>
+			<geometry>
+				<mesh filename="package://hdt_nri_description/meshes/hdt_mk3_m_finger_dist.STL"/>
+			</geometry>
+			<material name="yellow"/>
+		</visual>
+	</link>
+
+	<!-- ring prox -->
+	<joint name="ring_prox" type="revolute">
+		<hdt id="13" kmin="10" kmax="2" inertia="0.01"/>
+		<axis xyz="0 0 1"/>
+		<limit effort="4.0" lower="0" upper="1.5708" velocity="4.1888"/>
+		<origin xyz="-0.0000362 -0.165998 -0.0182153" rpy="0 0 0"/>
+		<parent link="palm"/>
+		<child link="ring_prox"/>
+		<dynamics damping="0.7" friction="0.0"/>
+	</joint>
+
+	<transmission name="tran13">
+		<type>transmission_interface/SimpleTransmission</type>
+		<joint name="ring_prox">
+			<hardwareInterface>EffortJointInterface</hardwareInterface>
+		</joint>
+		<actuator name="motor13">
+			<mechanicalReduction>1</mechanicalReduction>
+		</actuator>
+	</transmission>
+
+	<link name="ring_prox">
+		<collision>
+			<origin xyz="0 0 0" rpy="0 0 0"/>
+			<geometry>
+				<mesh filename="package://hdt_nri_description/meshes/hdt_mk3_m_finger_prox.STL"/>
+			</geometry>
+		</collision>
+
+		<visual>
+			<origin xyz="0 0 0" rpy="0 0 0"/>
+			<geometry>
+				<mesh filename="package://hdt_nri_description/meshes/hdt_mk3_m_finger_prox.STL"/>
+			</geometry>
+			<material name="yellow"/>
+		</visual>
+	</link>
+
+	<!-- ring med -->
+	<joint name="ring_med" type="fixed">
+		<origin xyz="-0.0005 -0.0435 0" rpy="0 0 0"/>
+		<parent link="ring_prox"/>
+		<child link="ring_med"/>
+	</joint>
+
+	<link name="ring_med">
+		<collision>
+			<origin xyz="0 0 0" rpy="0 0 0"/>
+			<geometry>
+				<mesh filename="package://hdt_nri_description/meshes/hdt_mk3_m_finger_med.STL"/>
+			</geometry>
+		</collision>
+
+		<visual>
+			<origin xyz="0 0 0" rpy="0 0 0"/>
+			<geometry>
+				<mesh filename="package://hdt_nri_description/meshes/hdt_mk3_m_finger_med.STL"/>
+			</geometry>
+			<material name="white"/>
+		</visual>
+	</link>
+
+	<!-- ring dist -->
+	<joint name="ring_dist" type="fixed">
+		<origin xyz="0.00045 -0.0277 0" rpy="0 0 0"/>
+		<parent link="ring_med"/>
+		<child link="ring_dist"/>
+	</joint>
+
+	<link name="ring_dist">
+		<collision>
+			<origin xyz="0 0 0" rpy="0 0 0"/>
+			<geometry>
+				<mesh filename="package://hdt_nri_description/meshes/hdt_mk3_m_finger_dist.STL"/>
+			</geometry>
+		</collision>
+
+		<visual>
+			<origin xyz="0 0 0" rpy="0 0 0"/>
+			<geometry>
+				<mesh filename="package://hdt_nri_description/meshes/hdt_mk3_m_finger_dist.STL"/>
+			</geometry>
+			<material name="yellow"/>
+		</visual>
+	</link>
+
+</robot>
+

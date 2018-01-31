@@ -1,0 +1,35 @@
+<?xml version="1.0" ?>
+<launch>
+
+	<!-- launch rviz -->
+	<node name="rviz" pkg="rviz" type="rviz" args="-d $(find hdt_nri_description)/launch/hdt_nri.rviz"/>
+	
+	<!-- arguments -->
+	<arg name="gui" default="true" />
+	<arg name="hinge_value" default="1.57"/>
+
+	<!-- load urdf, start state publishers -->
+	<param name="robot_description" command="$(find xacro)/xacro.py '$(find hdt_nri_description)/urdf/hdt_nri.xacro' hinge_angle:=$(arg hinge_value)"/>
+
+	<node name="feedback_pt" pkg="hdt_nri_description" type="path_talker_markers.py" output="screen">
+		<!--<param name="jointfreq" value="$(arg jointfreq)" type="int" />-->
+	</node>
+
+	<!--<node name="test_node" pkg="hdt_nri_description" type="testnode.py" output="screen">
+	</node>-->
+
+	<!--<node name="generate_adc" pkg="hdt_nri_description" type="adcgen.py" output="screen">-->
+		<!--<param name="jointfreq" value="$(arg jointfreq)" type="int" />-->
+	<!--</node>-->
+	
+	<node name="plotflybyvolts"
+        pkg="rqt_plot"
+        type="rqt_plot"
+        args="/adc_chatter" />
+
+	<node name="robot_state_publisher" pkg="robot_state_publisher" type="state_publisher" />
+	<node name="joint_state_publisher" pkg="joint_state_publisher" type="joint_state_publisher">
+		<param name="use_gui" value="$(arg gui)" />
+	</node>-
+
+</launch>

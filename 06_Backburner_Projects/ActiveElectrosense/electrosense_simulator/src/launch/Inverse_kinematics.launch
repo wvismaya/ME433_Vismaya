@@ -1,0 +1,39 @@
+<?xml version="1.0" ?>
+<launch>
+
+	<!-- launch controls package-->
+	<include file="$(find hdt_adroit_driver)/launch/hdt_adroit_coms.launch">
+		<arg name="coms_interface" value="socketcan"/>
+		<arg name="console_enabled" value="true"/>
+		<arg name="default_urdf" value="true"/>
+	</include>
+	
+	<!-- launch rviz -->
+	<node name="rviz" pkg="rviz" type="rviz" args="-d $(find hdt_nri_description)/launch/hdt_nri.rviz"/>
+	
+	<!-- arguments -->
+	<arg name="gui" default="true" />
+	<arg name="hinge_value" default="1.57"/>
+
+	<!-- load urdf, start state publishers -->
+	<param name="robot_description" command="$(find xacro)/xacro.py '$(find hdt_nri_description)/urdf/hdt_nri.xacro' hinge_angle:=$(arg hinge_value)"/>
+
+	<node name="feedback_pt" pkg="hdt_nri_description" type="path_talker_markers.py" output="screen">
+		<!--<param name="jointfreq" value="$(arg jointfreq)" type="int" />-->
+	</node>
+
+	<!-- <node name="custom_talker" pkg="hdt_nri_description" type="custom_talker_withIK3.py" output="screen">
+	</node> -->
+
+	<node name="custom_listener" pkg="hdt_nri_description" type="custom_listener.py" output="screen">
+	</node>
+
+	<node name="robot_state_publisher" pkg="robot_state_publisher" type="state_publisher" />
+	<!--<node name="joint_state_publisher" pkg="joint_state_publisher" type="joint_state_publisher">
+		<param name="use_gui" value="$(arg gui)" />
+	</node>-->
+	
+	<!-- publish joint cmds-->
+	<node name="joint_telem" pkg="hdt_adroit_driver" type="joint_state_to_telem" />
+
+</launch>

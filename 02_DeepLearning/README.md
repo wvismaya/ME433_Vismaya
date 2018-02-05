@@ -1,3 +1,1 @@
-# ME433_Vismaya
-
-The final robot. [![The final robot](https://img.youtube.com/vi/ifXdp5d3jx0/0.jpg)](https://youtu.be/ifXdp5d3jx0)
+Please refer the [Deep Learning Wiki here.](https://github.com/wvismaya/Northwestern_MSME_2k1617/wiki/Deep-Learning)
